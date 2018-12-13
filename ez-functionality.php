@@ -7,7 +7,7 @@
  *  Author: 		Rick R. Duncan - B3Marketing, LLC
  *  Author URI: 	http://rickrduncan.com
  *
- * 	Version: 		1.0.0
+ * 	Version: 		1.2.0
  *
  *  License: 		GPLv2 or later
  *  License URI: 	http://www.gnu.org/licenses/gpl-2.0.html
@@ -45,8 +45,12 @@ add_filter( 'widget_text', 'do_shortcode' );
  * Prevent WordPress from compressing images
  *
  * @since 1.0.0
+ * @since 1.2.0 - rewrite function to be compatible with Php 7.2. Previously used "create_function()" which is deprecated since PHP 7.2
  */
-add_filter( 'jpeg_quality', create_function( '', 'return 100;' ) );
+function ezf_jpeg_quality( $quality, $context ) {
+	return 100;
+}
+add_filter( 'jpeg_quality', 'ezf_jpeg_quality', 10, 2 );
 
 
 /**
