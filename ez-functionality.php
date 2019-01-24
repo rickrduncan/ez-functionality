@@ -7,7 +7,7 @@
  *  Author: 		Rick R. Duncan - B3Marketing, LLC
  *  Author URI: 	http://rickrduncan.com
  *
- * 	Version: 		1.3.0
+ * 	Version: 		1.3.1
  *
  *  License: 		GPLv2 or later
  *  License URI: 	http://www.gnu.org/licenses/gpl-2.0.html
@@ -90,7 +90,7 @@ add_filter( 'jpeg_quality', 'ezf_jpeg_quality', 10, 2 );
  */
 add_filter( 'wp_revisions_to_keep', 'ezf_set_revision_max', 10, 2 );
 function ezf_set_revision_max( $num, $post ) {     
-    $num = 6; //change 5 to match your preferred number of revisions
+    $num = 6; //change value to match your preferred number of revisions
 	return $num; 
 }
 
