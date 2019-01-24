@@ -7,7 +7,7 @@
  *  Author: 		Rick R. Duncan - B3Marketing, LLC
  *  Author URI: 	http://rickrduncan.com
  *
- * 	Version: 		1.2.0
+ * 	Version: 		1.3.0
  *
  *  License: 		GPLv2 or later
  *  License URI: 	http://www.gnu.org/licenses/gpl-2.0.html
@@ -20,6 +20,36 @@
  * @since 1.0.0
  */
 if ( ! defined( 'ABSPATH' ) ) exit;
+
+
+/**
+ *
+ * Add X-Frame-Options: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
+ *
+ * @since 1.3.0
+ *
+ */
+add_action('send_headers', function(){
+	header( 'X-Frame-Options: SAMEORIGIN' ); // Prevent Clickjacking
+	header( 'X-XSS-Protection: 1; mode=block' ); // Block Access If XSS Attack Is Suspected
+	header("X-Content-Type-Options: nosniff"); // Prevent MIME-Type Sniffing
+	header( 'Strict-Transport-Security: max-age=31536000' ); // Enforce the use of HTTPS
+});
+
+
+/**
+ *
+ * Disable XML-RPC.
+ * https://developer.wordpress.org/reference/hooks/xmlrpc_enabled/
+ *
+ * @since 1.3.0
+ *
+ */
+ function ezf_disable_xml_rpc() {
+	unset( $methods['pingback.ping'] );
+	return $methods; 
+ }
+add_filter( 'xmlrpc_methods', 'ezf_disable_xml_rpc');
  
 
 /**
@@ -60,7 +90,7 @@ add_filter( 'jpeg_quality', 'ezf_jpeg_quality', 10, 2 );
  */
 add_filter( 'wp_revisions_to_keep', 'ezf_set_revision_max', 10, 2 );
 function ezf_set_revision_max( $num, $post ) {     
-    $num = 5; //change 5 to match your preferred number of revisions
+    $num = 6; //change 5 to match your preferred number of revisions
 	return $num; 
 }
 
@@ -132,21 +162,7 @@ function ezf_remove_default_widgets() {
     unregister_widget('Twenty_Eleven_Ephemera_Widget');
 }
 
-
-/**
- * Add superscript and subscript to Tiny MCE editor.
- *
- * @since 1.0.0
- */
-add_filter('mce_buttons_2', 'ezf_add_mce_buttons_2'); 
-function ezf_add_mce_buttons_2($buttons) {
-	$buttons[] = 'superscript';
-	$buttons[] = 'subscript';
-	return $buttons;
-}
-
  
-
 /**
  *
  * Disable the emoji's.
