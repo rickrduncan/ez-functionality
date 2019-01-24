@@ -3,7 +3,7 @@ Contributors: rickrduncan
 Donate link: https://paypal.me/rickrduncan
 Requires at least: 4.5
 Tested up to: 4.8
-Stable tag: 1.0
+Stable tag: 1.3.1
 
 
 A plugin designed to host theme independent code snippets that extend and customize the features of WordPress.
@@ -27,6 +27,8 @@ Visit the <a href="http://rickrduncan.com/pro/wordpress/functionality-plugin">EZ
 
 == Changelog ==
 
+= 1.3.1 =
+Fixed a typo.
 
 = 1.0 =
 Initial release.
